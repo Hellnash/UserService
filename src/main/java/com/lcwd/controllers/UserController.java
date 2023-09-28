@@ -8,10 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
+@SuppressWarnings("unused")
 public class UserController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<User> getAUser(@PathVariable UUID userId){
+    public ResponseEntity<User> getAUser(@PathVariable String userId){
             return new ResponseEntity<>(userService.getUser(userId), HttpStatus.FOUND);
 
     }

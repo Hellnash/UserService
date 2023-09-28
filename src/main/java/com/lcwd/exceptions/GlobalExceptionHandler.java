@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice //It will make it centralised handler for the spring boot
+@SuppressWarnings("unused")
 public class GlobalExceptionHandler { //handlers are created to handle custom exceptions
 
     @ExceptionHandler(ResourceNotFoundException.class)
