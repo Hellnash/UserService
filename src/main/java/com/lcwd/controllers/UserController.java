@@ -1,9 +1,6 @@
 package com.lcwd.controllers;
 
-import com.lcwd.dtos.UserDto;
 import com.lcwd.entities.User;
-import com.lcwd.exceptions.ResourceNotFoundException;
-import com.lcwd.services.Impl.UserServiceImpl;
 import com.lcwd.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,20 +15,20 @@ import java.util.UUID;
 public class UserController {
 
     @Autowired
-    UserServiceImpl userService;
+    UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser (@RequestBody UserDto userDto){
-        return new ResponseEntity<>(userService.createUser(userDto), HttpStatus.CREATED);
+    public ResponseEntity<User> createUser (@RequestBody User user){
+        return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDto>> findAllUsers(){
+    public ResponseEntity<List<User>> findAllUsers(){
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.FOUND);
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDto> getAUser(@PathVariable UUID userId){
+    public ResponseEntity<User> getAUser(@PathVariable UUID userId){
             return new ResponseEntity<>(userService.getUser(userId), HttpStatus.FOUND);
 
     }

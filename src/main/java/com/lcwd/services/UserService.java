@@ -1,6 +1,5 @@
 package com.lcwd.services;
 
-import com.lcwd.dtos.UserDto;
 import com.lcwd.entities.User;
 
 import java.util.List;
@@ -8,9 +7,9 @@ import java.util.UUID;
 
 public interface UserService {
 
-    UserDto createUser(UserDto userDto);
+    User createUser(User user);
 
-    List<UserDto> getAllUsers();
+    List<User> getAllUsers();
 
-    UserDto getUser(UUID userId);
+    User getUser(UUID userId);
 }
