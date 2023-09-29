@@ -1,7 +1,7 @@
-package com.lcwd.controllers;
+package com.lcwd.UserService.controllers;
 
-import com.lcwd.entities.User;
-import com.lcwd.services.UserService;
+import com.lcwd.UserService.entities.User;
+import com.lcwd.UserService.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

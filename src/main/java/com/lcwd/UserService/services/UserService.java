@@ -1,9 +1,8 @@
-package com.lcwd.services;
+package com.lcwd.UserService.services;
 
-import com.lcwd.entities.User;
+import com.lcwd.UserService.entities.User;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface UserService {
 

@@ -1,6 +1,6 @@
-package com.lcwd.repositories;
+package com.lcwd.UserService.repositories;
 
-import com.lcwd.entities.User;
+import com.lcwd.UserService.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

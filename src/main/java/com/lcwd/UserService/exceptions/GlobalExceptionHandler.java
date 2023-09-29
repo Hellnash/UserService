@@ -1,6 +1,6 @@
-package com.lcwd.exceptions;
+package com.lcwd.UserService.exceptions;
 
-import com.lcwd.payloads.ApiResponse;
+import com.lcwd.UserService.payloads.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

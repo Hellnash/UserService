@@ -1,4 +1,4 @@
-package com.lcwd.exceptions;
+package com.lcwd.UserService.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException{
     public ResourceNotFoundException(String message) {

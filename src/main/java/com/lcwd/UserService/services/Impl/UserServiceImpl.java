@@ -1,9 +1,9 @@
-package com.lcwd.services.Impl;
+package com.lcwd.UserService.services.Impl;
 
-import com.lcwd.entities.User;
-import com.lcwd.exceptions.ResourceNotFoundException;
-import com.lcwd.repositories.UserRepository;
-import com.lcwd.services.UserService;
+import com.lcwd.UserService.exceptions.ResourceNotFoundException;
+import com.lcwd.UserService.entities.User;
+import com.lcwd.UserService.repositories.UserRepository;
+import com.lcwd.UserService.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

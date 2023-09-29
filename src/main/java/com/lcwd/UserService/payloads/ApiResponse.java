@@ -1,4 +1,4 @@
-package com.lcwd.payloads;
+package com.lcwd.UserService.payloads;
 
 import lombok.*;
 import org.springframework.http.HttpStatus;

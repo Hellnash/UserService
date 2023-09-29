@@ -1,4 +1,4 @@
-package com.lcwd.entities;
+package com.lcwd.UserService.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
