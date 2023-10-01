@@ -5,12 +5,13 @@ import com.lcwd.UserService.entities.Rating;
 import com.lcwd.UserService.entities.User;
 import com.lcwd.UserService.exceptions.ResourceNotFoundException;
 import com.lcwd.UserService.repositories.UserRepository;
+import com.lcwd.UserService.services.HotelService;
+import com.lcwd.UserService.services.RatingService;
 import com.lcwd.UserService.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -23,6 +24,10 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
     @Autowired
     RestTemplate restTemplate;
+    @Autowired
+    HotelService hotelService;
+    @Autowired
+    RatingService ratingService;
 
     @Override
     public User createUser(User user) {
@@ -34,10 +39,12 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsers() {
         List<User> users = userRepository.findAll();
         return users.stream().peek(user -> {
-            Rating[] ratings = restTemplate.getForObject("http://RATING-SERVICE/ratings/user/" + user.getUserId(), Rating[].class);
-            List<Rating> userRatings = Arrays.stream(ratings).toList();
+            /*Rating[] ratings = restTemplate.getForObject("http://RATING-SERVICE/ratings/user/" + user.getUserId(), Rating[].class);
+            List<Rating> userRatings = Arrays.stream(ratings).toList();*/
+            List<Rating> userRatings = ratingService.getRatings(user.getUserId());
             List<Rating> ratingList = userRatings.stream().peek(rating -> {
-                Hotel hotel = restTemplate.getForObject("http://HOTEL-SERVICE/hotels/" + rating.getHotelId(), Hotel.class);
+                //Hotel hotel = restTemplate.getForObject("http://HOTEL-SERVICE/hotels/" + rating.getHotelId(), Hotel.class);
+                Hotel hotel = hotelService.getHotel(rating.getHotelId());
                 rating.setHotel(hotel);
             }).toList();
             user.setRatings(ratingList);
@@ -48,11 +55,13 @@ public class UserServiceImpl implements UserService {
     public User getUser(String userId) {
 
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("Resource not Found in Server for the user !! " + userId));
-        Rating[] userRatings = restTemplate.getForObject("http://RATING-SERVICE/ratings/user/" + user.getUserId(), Rating[].class);
-        List<Rating> ratings = Arrays.stream(userRatings).toList();
-        user.setRatings(ratings);
+        /*Rating[] userRatings = restTemplate.getForObject("http://RATING-SERVICE/ratings/user/" + user.getUserId(), Rating[].class);
+        List<Rating> ratings = Arrays.stream(userRatings).toList()*/
+        List<Rating> ratings = ratingService.getRatings(user.getUserId());
+        //user.setRatings(ratings);
         List<Rating> collectedRatings = ratings.stream().peek(rating -> {
-            Hotel hotel = restTemplate.getForObject("http://HOTEL-SERVICE/hotels/" + rating.getHotelId(), Hotel.class);
+            //Hotel hotel = restTemplate.getForObject("http://HOTEL-SERVICE/hotels/" + rating.getHotelId(), Hotel.class);
+            Hotel hotel = hotelService.getHotel(rating.getHotelId());
             rating.setHotel(hotel);
         }).collect(Collectors.toList());
         user.setRatings(collectedRatings);
