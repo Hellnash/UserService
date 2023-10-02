@@ -12,5 +12,41 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+#config client configuration
   config:
     import: configserver:http://localhost:8085
+#enabling circuit breakers in actuator
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+    #exposing health of actuator to web endpoints
+  endpoints:
+    web:
+      exposure:
+        include: health
+  #enabling health of actuator to show all details of endpoint
+  endpoint:
+    health:
+      show-details: always
+#Setting up circuit breaker thresholds
+resilience4j:
+  circuitbreaker:
+    instances:
+      ratingHotelBreaker:
+        #Registring to health of actuator
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+        #setting up failure rate
+        failureRateThreshold: 50
+        #Minimum no of request on which the failure rate will be calculated
+        minimumNumberOfCalls: 5
+        #if 5/2 = 2.5 request fails then close -> open
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        #Time duration post which open -> half open
+        waiDurationInOpenState: 6s
+        #No. of request on which half-open -> open (failure) or half-open -> close (success)
+        permittedNoOfCallsInHalfOpenState: 3
+        #Sliding window configuration
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
