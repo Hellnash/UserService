@@ -67,8 +67,3 @@ resilience4j:
         #Sliding window configuration
         slidingWindowSize: 10
         slidingWindowType: COUNT_BASED
-#Setting up octa configuration
-okta:
-  oauth2:
-    issuer: https://dev-63065601.okta.com/oauth2/default
-    audience: api://default
